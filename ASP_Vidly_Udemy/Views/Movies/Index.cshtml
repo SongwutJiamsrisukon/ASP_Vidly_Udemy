@@ -1,0 +1,22 @@
+﻿@model IEnumerable<ASP_Vidly_Udemy.Models.Movie>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Movies</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var movie in Model)
+            {
+                <tr>
+                    <td>@movie.Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
