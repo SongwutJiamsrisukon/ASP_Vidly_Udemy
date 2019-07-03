@@ -10,6 +10,7 @@ namespace ASP_Vidly_Udemy.Controllers
 {
     public class CustomersController : Controller
     {
+
         // GET: Customer
         public ActionResult Index()
         {
