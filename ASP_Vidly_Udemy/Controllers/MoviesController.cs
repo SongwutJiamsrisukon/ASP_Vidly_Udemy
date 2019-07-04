@@ -13,12 +13,12 @@ namespace ASP_Vidly_Udemy.Controllers
 {
     public class MoviesController : Controller
     {
-        public ApplicationDbContext _context;//declare property for DbConnection
+        public ApplicationDbContext _context;//declare property for DbConnection 
         public MoviesController()
         {
             _context = new ApplicationDbContext();
         }
-
+        
         protected override void Dispose(bool disposing)
         {
             _context.Dispose();//delete after used(same db.closed())
