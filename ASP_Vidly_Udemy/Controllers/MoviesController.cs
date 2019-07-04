@@ -31,11 +31,13 @@ namespace ASP_Vidly_Udemy.Controllers
             return View(movies);
         }
 
-        public ViewResult Details(int id)
+        public ActionResult Details(int id)
         {
-            var movies = _context.Movies.Include(m => m.Genre).SingleOrDefault(c => c.Id == id); ;
+            var movie = _context.Movies.Include(m => m.Genre).SingleOrDefault(c => c.Id == id);
+            if (movie == null)
+                return HttpNotFound();
 
-            return View(movies);
+            return View(movie);
         }
 
         // GET: Movies/Random
