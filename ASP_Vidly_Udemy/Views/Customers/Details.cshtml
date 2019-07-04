@@ -5,4 +5,12 @@
 }
 
 <h2>@Model.Name</h2>
+<ul>
+    <li>Membership Type: @Model.MembershipType.Name</li>
+    @if (Model.BirthDate.HasValue)//fix error when null
+    {
+        <li>Birthdate: @Model.BirthDate.Value.ToShortDateString()</li>
+        <li>BirthdateFull: @Model.BirthDate</li>
+    }
+</ul>
 
