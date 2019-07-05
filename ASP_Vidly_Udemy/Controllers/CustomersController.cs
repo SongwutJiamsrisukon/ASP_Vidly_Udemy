@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using ASP_Vidly_Udemy.Models;
 
 using System.Data.Entity;
+using ASP_Vidly_Udemy.ViewModels;
 
 namespace ASP_Vidly_Udemy.Controllers
 {
@@ -22,6 +23,64 @@ namespace ASP_Vidly_Udemy.Controllers
         {
             _context.Dispose();//delete after used(same db.closed())
         }
+
+        public ActionResult New()
+        {
+            var membershipTypes = _context.MembershipTypes.ToList();
+            var customerViewModel = new CustomerFormViewModel
+            {
+                MembershipTypes = membershipTypes
+            };
+            return View("CustomerForm",customerViewModel);
+        }
+        public ActionResult Edit(int id)
+        {
+            var customer = _context.Customers.SingleOrDefault(c => c.Id == id);
+
+            if (customer == null)
+                return HttpNotFound();
+
+            var customerFormViewModel = new CustomerFormViewModel
+            {
+                Customer = customer,
+                MembershipTypes = _context.MembershipTypes.ToList()
+            };
+
+            return View("CustomerForm", customerFormViewModel);
+        }
+
+        
+        [HttpPost]
+        public ActionResult Save(Customer customer)//model binding from request date with framework
+        {
+
+            if (customer.Id == 0)
+            {
+                _context.Customers.Add(customer);//Db_context marking add,update,delete in memories
+            }
+            else
+            {
+                var customerInDb = _context.Customers.Single(c => c.Id == customer.Id);//no need default(when not found these throw exception)
+
+                //way 1 update all object | disadventage force to update all data
+                //TryUpdateModel(customerInDb);
+
+                //way 2 updatate selecting object | disadvantage on magic string
+                //TryUpdateModel(customerInDb, "", new String[] { "Name","BirthDate,", "MembershipTypeId", "IsSubscribedToNewsletter" });
+
+                //way 3 updatate selecting object | disadvantage many line
+                customerInDb.Name = customer.Name;
+                customerInDb.BirthDate = customer.BirthDate;
+                customerInDb.MembershipTypeId = customer.MembershipTypeId;
+                customerInDb.IsSubscribedToNewsletter = customer.IsSubscribedToNewsletter;
+
+            }
+            _context.SaveChanges();          //Db_context save(generate sql and run to database on this line)
+
+            return RedirectToAction("Index","Customers");//redirect to CustomersController with Index action(method)
+        }
+
+
 
         // GET: Customer
         public ActionResult Index()

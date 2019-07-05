@@ -15,9 +15,14 @@ namespace ASP_Vidly_Udemy.Models
         public string Name { get; set; }
 
         public bool IsSubscribedToNewsletter { get; set; }
+
+        [Display(Name = "Membership Type")]
         public MembershipType MembershipType { get; set; }//Navagation property 
+
         public byte MembershipTypeId { get; set; }//foreignkey auto generate by entityFramework
 
+        [Display(Name="Date Of Birth")]
         public DateTime? BirthDate { get; set; }
+
     }
 }
