@@ -10,5 +10,16 @@ namespace ASP_Vidly_Udemy.ViewModels
     {
         public IEnumerable<MembershipType> MembershipTypes { get; set; } //using Instead List (need to read only we don't include add remove or etc)
         public Customer Customer { get; set; }
+
+        public string Title
+        {
+            get
+            {
+                if (Customer != null && Customer.Id != 0)
+                    return "Edit Customer";
+
+                return "New Customer";
+            }
+        }
     }
 }
