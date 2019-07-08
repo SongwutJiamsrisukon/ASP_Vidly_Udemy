@@ -34,9 +34,8 @@ namespace ASP_Vidly_Udemy.Controllers
         public ActionResult New()
         {
             var genre = _context.Genres.ToList();
-            var movieFormViewModel = new MovieFormViewModel
+            var movieFormViewModel = new MovieFormViewModel()
             {
-                Movie = new Movie(),
                 Genres = genre
             };
 
@@ -51,9 +50,8 @@ namespace ASP_Vidly_Udemy.Controllers
                 return HttpNotFound();
 
             var genre = _context.Genres.ToList();
-            var movieFormViewModel = new MovieFormViewModel
+            var movieFormViewModel = new MovieFormViewModel(movie)
             {
-                Movie = movie,
                 Genres = genre
             };
 
@@ -67,9 +65,8 @@ namespace ASP_Vidly_Udemy.Controllers
 
             if (!ModelState.IsValid)
             {
-                var movieFormViewModel = new MovieFormViewModel
+                var movieFormViewModel = new MovieFormViewModel(movie)
                 {
-                    Movie = movie,
                     Genres = _context.Genres.ToList()
                 };
             }
