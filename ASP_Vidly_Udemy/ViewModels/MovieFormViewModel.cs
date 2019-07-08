@@ -7,6 +7,7 @@ using System.Web;
 
 namespace ASP_Vidly_Udemy.ViewModels
 {
+
     public class MovieFormViewModel
     {
         public IEnumerable<Genre> Genres { get; set; }
