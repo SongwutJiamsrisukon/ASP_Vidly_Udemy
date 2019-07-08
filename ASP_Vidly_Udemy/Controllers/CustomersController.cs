@@ -29,6 +29,7 @@ namespace ASP_Vidly_Udemy.Controllers
             var membershipTypes = _context.MembershipTypes.ToList();
             var customerViewModel = new CustomerFormViewModel
             {
+                Customer = new Customer(), //set property with default value to fix hiddden propery in Html form like Customer.Id = 0
                 MembershipTypes = membershipTypes
             };
             return View("CustomerForm",customerViewModel);
@@ -51,8 +52,20 @@ namespace ASP_Vidly_Udemy.Controllers
 
         
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Save(Customer customer)//model binding from request date with framework
         {
+
+            if (!ModelState.IsValid)
+            {
+                var viewModel = new CustomerFormViewModel
+                {
+                    Customer = customer,
+                    MembershipTypes = _context.MembershipTypes.ToList()
+                };
+
+                return View("CustomerForm", viewModel);
+            }
 
             if (customer.Id == 0)
             {
