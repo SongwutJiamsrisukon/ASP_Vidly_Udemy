@@ -8,6 +8,7 @@ namespace ASP_Vidly_Udemy
     {
         public void Configuration(IAppBuilder app)
         {
+            //
             ConfigureAuth(app);
         }
     }
