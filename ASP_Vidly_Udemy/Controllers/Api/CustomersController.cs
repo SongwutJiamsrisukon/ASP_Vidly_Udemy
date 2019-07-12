@@ -9,6 +9,8 @@ using System.Web.Http;
 using ASP_Vidly_Udemy.Dtos;
 using AutoMapper;
 
+using System.Data.Entity;
+
 namespace ASP_Vidly_Udemy.Controllers.Api
 {
     public class CustomersController : ApiController
@@ -24,8 +26,11 @@ namespace ASP_Vidly_Udemy.Controllers.Api
         //GET /api/customers
         public IHttpActionResult GetCustomers()
         {
-            var customerDbo = _context.Customers.ToList().Select(Mapper.Map<Customer, CustomerDto>);//use Select method to Map Customer object(getFrom_context) to customerDto 
-                                                                                                    //Generic <Source,Target> and send delegate to SelectMethod
+            var customerDbo = _context.Customers
+                .Include(c => c.MembershipType)
+                .ToList()
+                .Select(Mapper.Map<Customer, CustomerDto>);//use Select method to Map Customer object(getFrom_context) to customerDto 
+                                                           //Generic <Source,Target> and send delegate to SelectMethod
             return Ok(customerDbo);
         }
 

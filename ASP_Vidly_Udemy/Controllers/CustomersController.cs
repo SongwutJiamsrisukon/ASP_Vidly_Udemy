@@ -99,8 +99,13 @@ namespace ASP_Vidly_Udemy.Controllers
         public ActionResult Index()
         {
             //var Customers = _context.Customers;//DbSet(all table) || This is Defered excution(not query{using SQL} in this line) so it query in Html when someone need property in Table
+            /*
             var Customers = _context.Customers.Include(c => c.MembershipType).ToList();//DbSet(all table) || This query{using SQL} in this line
             return View(Customers);
+            */
+
+            //use api instead
+            return View();
         }
 
         public ActionResult Details(int id)

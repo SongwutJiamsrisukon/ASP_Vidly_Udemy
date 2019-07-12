@@ -1,42 +1,74 @@
-﻿@model IEnumerable<ASP_Vidly_Udemy.Models.Customer>
-@*
-    Note: I've set the model for this view to IEnumerable<Customer>.
-    This is a simple interface implemented by the list class. Since
-    in this view we only want to iterate over this list, and we don't
-    need any of the operations in the List class (eg Add, Remove, etc),
-    it's better to use the IEnumerable interface, which allows use to
-    iterate over the list. If in the future, we replace the List with a
-    different data structure, as long as it is enumerable, our view code
-    will remain unchanged.
-*@
-
+﻿<!--no need to use model anymore-->
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@if (!Model.Any())
-{
-    <p>We don't have any customers yet.</p>
-}
-else
-{
-    <table class="table table-bordered table-hover">
-        <thead>
-            <tr>
-                <th>Customer</th>
-                <th>Membership Type</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var customer in Model)
-            {
-            <tr>
-                <td>@Html.ActionLink(customer.Name, "Edit", "Customers", new { id = customer.Id }, null)</td>
-                <td>@customer.MembershipType.Name</td>
-            </tr>
-            }
-        </tbody>
-    </table>
-}
+<table id="customers" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Customer</th>
+            <th>Membership Type</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!--Generate with DataTable from JavaScript-->
+    </tbody>
+</table>
 
+
+@section scripts{
+
+    <script>
+        $(document).ready(function () {
+
+            var table = $("#customers").DataTable({//use API to get JSON for datatable
+                ajax: { //ajax object property
+                    url: "/api/customers",
+                    dataSrc: "" //return JSON Data ที่เป็น array of object
+                },
+                columns: [//นำ array object ที่ได้มาบรรจุลง column โดย data: จะอิงจาก JSON
+                    {
+                        data: "name",//tell data table to get data for this column with customer.Name **plz use "name" with lowercase
+                        render: function (data, type, row) {//this is custom rendering function
+                            //type is type for this column(no use this but we need it to use overload function that had row in the third parametor)
+                            //row is actual object(array object) ดึงข้อมูลผู้เรียก data จากตัวอย่าง customer.name จะดึง customer ออกมา
+                            return "<a href='/customers/edit/" + row.id + "'>" + data + "</a>";
+                        }
+                    },
+                    {
+                        data: "membershipType.name" //defalut rendering function
+                    },
+                    {
+                        data: "id",
+                        render: function (data) {
+                            return "<button  data-customer-id=" + data + " class='btn-link js-deleteCustomer'>Delete</button>";
+                        }
+                    }
+                ]
+            });
+
+            //use 1 handler and hook to selector to reduce using memory
+            //had only one click .on(handler) to all delete button like .on(handler) hook #customers(Selector)
+            //We had one Selector(#customers) on  <table id ="customers" class="table table-bordered table-hover">
+            $("#customers").on("click", ".js-deleteCustomer", function () {//this function call when button is click
+                var button = $(this);//$(this) is button
+
+                bootbox.confirm("Are you sure you want to delete this customer?", function (result) {//because it not native JavaScript so it use callback function
+                    if (result) {
+                        $.ajax({
+                            //you can use button.attr("data-customer-id") instead
+                            url: "/api/customers/" + button.attr("data-customer-id"), //because bootbox is callback function then u can't use $(this) to reference button anymore
+                            method: "DELETE",
+                            success: function () {//call back function when use $(this) is not button anymore
+                                //using datatable API row,remove(),draw()
+                                table.row(button.parents("tr")).remove().draw();//pass tr refrence to datatable to get row then remove it and refresh datatable
+                            }
+                        });//end ajax
+                    }//end if result
+                });//end bootbox
+            });//end clickBTN
+        });
+    </script>
+}
