@@ -9,6 +9,8 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
+using System.Data.Entity;
+
 namespace ASP_Vidly_Udemy.Controllers.Api
 {
     public class MoviesController : ApiController
@@ -22,7 +24,7 @@ namespace ASP_Vidly_Udemy.Controllers.Api
 
         public IHttpActionResult GetMovies()
         {
-            var movieDbo = _context.Movies.ToList().Select(Mapper.Map<Movie,MovieDto>);
+            var movieDbo = _context.Movies.Include(c => c.Genre).ToList().Select(Mapper.Map<Movie,MovieDto>);
             return Ok(movieDbo);
         }
 
