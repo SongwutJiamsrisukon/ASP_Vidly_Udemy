@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace ASP_Vidly_Udemy.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         public ActionResult Index()

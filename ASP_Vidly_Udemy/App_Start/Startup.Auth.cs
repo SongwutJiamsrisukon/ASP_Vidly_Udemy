@@ -54,9 +54,9 @@ namespace ASP_Vidly_Udemy
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "481386432690069",
+               appSecret: "f56944ae011fd0615312be9e4c610b1a");
 
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{

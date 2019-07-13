@@ -26,9 +26,13 @@ namespace ASP_Vidly_Udemy.Controllers
 
         public ViewResult Index()
         {
-            return View();
+            if(User.IsInRole(RoleName.CanManageMovies))
+                return View();
+
+            return View(RoleName.UserPreFix + System.Reflection.MethodBase.GetCurrentMethod().Name);
         }
 
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public ActionResult New()
         {
             var genre = _context.Genres.ToList();
@@ -40,6 +44,7 @@ namespace ASP_Vidly_Udemy.Controllers
             return View("MovieForm", movieFormViewModel);
         }
 
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public ActionResult Edit(int id)
         {
             var movie = _context.Movies.SingleOrDefault(c => c.Id == id);

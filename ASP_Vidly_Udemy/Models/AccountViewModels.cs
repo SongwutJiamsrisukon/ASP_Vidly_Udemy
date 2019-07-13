@@ -5,9 +5,14 @@ namespace ASP_Vidly_Udemy.Models
 {
     public class ExternalLoginConfirmationViewModel
     {
+
         [Required]
         [Display(Name = "Email")]
         public string Email { get; set; }
+
+        [Required]
+        [Display(Name = "Driving License")]
+        public string DrivingLicense { get; set; }
     }
 
     public class ExternalLoginListViewModel
@@ -64,6 +69,10 @@ namespace ASP_Vidly_Udemy.Models
 
     public class RegisterViewModel
     {
+        [Required]
+        [Display(Name = "Driving License")]
+        public string DrivingLicense { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
