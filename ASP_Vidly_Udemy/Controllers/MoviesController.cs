@@ -63,6 +63,7 @@ namespace ASP_Vidly_Udemy.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public ActionResult Save(Movie movie)
         {
 

@@ -13,6 +13,11 @@ namespace ASP_Vidly_Udemy.Models
         [Required]
         [Display(Name = "Driving License")]
         public string DrivingLicense { get; set; }
+
+        [Required]
+        [Display(Name = "Phone")]
+        [StringLength(50)]
+        public string PhoneNumber { get; set; }
     }
 
     public class ExternalLoginListViewModel
@@ -70,13 +75,18 @@ namespace ASP_Vidly_Udemy.Models
     public class RegisterViewModel
     {
         [Required]
+        [EmailAddress]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+
+        [Required]
         [Display(Name = "Driving License")]
         public string DrivingLicense { get; set; }
 
         [Required]
-        [EmailAddress]
-        [Display(Name = "Email")]
-        public string Email { get; set; }
+        [Display(Name = "Phone")]
+        [StringLength(50)]
+        public string PhoneNumber { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
