@@ -24,14 +24,19 @@ namespace ASP_Vidly_Udemy.Controllers.Api
         }
 
         //GET /api/customers
-        public IHttpActionResult GetCustomers()
+        public IHttpActionResult GetCustomers(string query = null)//optional parameter use in Views at New.cshtml in Rentals (send by typeahead plugin)
         {
-            var customerDbo = _context.Customers
-                .Include(c => c.MembershipType)
+            var customersQuery = _context.Customers
+                .Include(c => c.MembershipType);//IQueryable Object
+
+            if (!String.IsNullOrWhiteSpace(query))
+                customersQuery = customersQuery.Where(c => c.Name.Contains(query));
+
+            var customerDtos = customersQuery
                 .ToList()
                 .Select(Mapper.Map<Customer, CustomerDto>);//use Select method to Map Customer object(getFrom_context) to customerDto 
                                                            //Generic <Source,Target> and send delegate to SelectMethod
-            return Ok(customerDbo);
+            return Ok(customerDtos);
         }
 
         //GET /api/customers/1

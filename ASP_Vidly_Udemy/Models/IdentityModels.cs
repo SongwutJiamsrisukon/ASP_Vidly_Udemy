@@ -29,6 +29,8 @@ namespace ASP_Vidly_Udemy.Models
         public DbSet<MembershipType> MembershipTypes { get; set; }
         public DbSet<Genre> Genres { get; set; }
 
+        public DbSet<RentalCustomerMovie> RentalCustomerMovies { get; set; }
+
 
 
 

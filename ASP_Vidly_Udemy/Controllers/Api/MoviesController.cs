@@ -22,9 +22,15 @@ namespace ASP_Vidly_Udemy.Controllers.Api
             _context = new ApplicationDbContext();
         }
 
-        public IHttpActionResult GetMovies()
+        public IHttpActionResult GetMovies(string query = null)//optional parameter use in Views at New.cshtml in Rentals (send by typeahead plugin)
         {
-            var movieDbo = _context.Movies.Include(c => c.Genre).ToList().Select(Mapper.Map<Movie,MovieDto>);
+            var moviesQuery = _context.Movies.Include(c => c.Genre).Where(m => m.NumberAvailable > 0);
+
+            if (!String.IsNullOrEmpty(query))
+                moviesQuery = moviesQuery.Where(m => m.Name.Contains(query));
+
+            var movieDbo = moviesQuery.ToList().Select(Mapper.Map<Movie,MovieDto>);
+
             return Ok(movieDbo);
         }
 
