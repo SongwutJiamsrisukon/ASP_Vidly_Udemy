@@ -23,6 +23,7 @@ namespace ASP_Vidly_Udemy.Controllers.Api
             //ไม่จำเป็นต้อง if(customer == null) เพราะไม่ใช่ external api(public api) เราจึงสามารถดักข้อมูลจากหน้าบ้านได้
 
             var movies = _context.Movies.Where(m => rentalDto.MovieIds.Contains(m.Id)).ToList();//query before loop
+            //Can't use _context.Movies.Where(m => m.Id.Contains(rentalDto.MovieIds)).ToList(); because m.Id is not list
             //SELECT * FROM Movies WHERE Id IN (1,2,3...)
 
             foreach (var movie in movies)
