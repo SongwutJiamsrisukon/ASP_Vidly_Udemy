@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ASP_Vidly_Udemy.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace ASP_Vidly_Udemy.Controllers
 {
@@ -151,10 +152,26 @@ namespace ASP_Vidly_Udemy.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    DrivingLicense = model.DrivingLicense,
+                    PhoneNumber = model.PhoneNumber
+                };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    /*//create Admin role + relation | หลัง add ด้วย code นี้เสร็จอย่าลืม comment code ออก แล้วทำ migration เพื่อเวลา นำ DB ไปใช้งานจริงจะได้มี Admin Role พร้อมใช้งานโดยไม่ต้อง add ใหม่
+                    var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());//Our Store use to access db like _context = new ApplicationDbContext();
+                    var roleManager = new RoleManager<IdentityRole>(roleStore);//create roleManager to use API
+                    //use RoleManager API to create new role //we new object with Generic IdentityRole so the parameter of CreateAsync is IdentityRole;
+                    await roleManager.CreateAsync(new IdentityRole("CanManageMovies"));
+
+                    //Use UserManager API asign new user to new role on aspNetUserRoles table(use for relation manyToMany)
+                    await UserManager.AddToRoleAsync(user.Id,"CanManageMovies");
+                    */
+
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
@@ -367,7 +384,12 @@ namespace ASP_Vidly_Udemy.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    DrivingLicense = model.DrivingLicense,
+                    PhoneNumber = model.PhoneNumber
+                };
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {

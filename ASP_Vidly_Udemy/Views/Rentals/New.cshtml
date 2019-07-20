@@ -1,0 +1,122 @@
+﻿@{
+    ViewBag.Title = "New Rental Form";
+}
+
+<h2>New Rental Form</h2>
+
+<form id="newRental">
+    <div class="form-group">
+        <label>Customer</label>
+        <div class="tt-container">
+            <input id="customerTextbox" name="c" data-rule-customValidCustomer="true" required type="text" value="" class="form-control" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Movie</label>
+        <div class="tt-container">
+            <input id="movieTextbox" name="m" data-rule-customAtLeastOneMovie="true" type="text" value="" class="form-control" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 col-sm-4">
+            <ul id="moviesList" class="list-group"></ul>
+        </div>
+    </div>
+
+    <button class="btn btn-primary">Sumbit</button>
+</form>
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $(document).ready(function () {
+
+            var tempVM = {
+                movieIds: []
+            };
+
+            var getCustomers = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                remote: {
+                    url: '/api/customers?query=%QUERY',
+                    wildcard: '%QUERY'
+                }
+            });
+
+            $('#customerTextbox').typeahead({
+                minLength: 2,//minLength: 2 typing at least 2 char, is active typehead to query on server
+                highlight: true//matching character is bold
+            }, {
+                    name: 'suggestCustomers',
+                    display: 'name',
+                    source: getCustomers
+                }).on("typeahead:select", function (e, c) {
+                    tempVM.customerId = c.id;//must same In rental
+                });
+
+            //-------------------------------
+            var getMovies = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                remote: {
+                    url: '/api/movies?query=%QUERY',
+                    wildcard: '%QUERY'
+                }
+            });
+
+            $('#movieTextbox').typeahead({
+                minLength: 2,//minLength: 2 typing at least 2 char, is active typehead to query on server
+                highlight: true//matching character is bold
+            }, {
+                    name: 'suggestMovies',
+                    display: 'name',
+                    source: getMovies
+                }).on("typeahead:select", function (e, m) {
+                    $("#movieTextbox").typeahead("val", "");//set blank string after select suggest qurry
+                    tempVM.movieIds.push(m.id);
+                    $("#moviesList").append("<li class='list-group-item'>" + m.name + "</li>");//modify Dom directly
+                });
+
+            $.validator.addMethod("customValidCustomer", function () {
+                return tempVM.customerId && tempVM.customerId;
+            }, "Please select a valid customer.");
+
+            $.validator.addMethod("customAtLeastOneMovie", function () {
+                return tempVM.movieIds.length > 0;
+            }, "Please select at least one movie.");
+
+
+            var validator = $("#newRental").validate({
+                submitHandler: function () {//if form valid this function will submit form to server
+                    $.ajax({
+                        url: "/api/rentals",
+                        method: "post",
+                        data: tempVM
+                    })
+                    .done(function () {
+                        toastr.success("Rentals successfully recoreded.");
+                        console.log(tempVM);//debug
+                        //clear form when success
+                        $("#customerTextbox").typeahead("val", "");
+                        $("#movieTextbox").typeahead("val", "");
+                        $("#moviesList").empty();
+                        tempVM = { movieIds: [] };
+                        validator.resetForm();//reset validation state
+                    })
+                    .fail(function () {
+                        toastr.error("Something unexpected happened.");
+                        console.log(tempVM);//debug
+                     });
+
+                    return false;//use instead e.preventDefault() because with submitHanler don't have e parameter
+                }
+            });
+        });
+    </script>
+
+}

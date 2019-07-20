@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace ASP_Vidly_Udemy.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         public ActionResult Index()
@@ -15,6 +16,7 @@ namespace ASP_Vidly_Udemy.Controllers
 
         public ActionResult About()
         {
+
             ViewBag.Message = "Your application description page.";
 
             return View();
