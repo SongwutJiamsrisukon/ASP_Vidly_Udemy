@@ -259,10 +259,6 @@
     <Compile Include="Migrations\201907130952099_AddDrivingLicecenseToApplicationUser.Designer.cs">
       <DependentUpon>201907130952099_AddDrivingLicecenseToApplicationUser.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201907131558345_AspNetUaersAddDataAnnotationToPhoneNumber.cs" />
-    <Compile Include="Migrations\201907131558345_AspNetUaersAddDataAnnotationToPhoneNumber.Designer.cs">
-      <DependentUpon>201907131558345_AspNetUaersAddDataAnnotationToPhoneNumber.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\201907151520173_AddRentalCustomerMovie.cs" />
     <Compile Include="Migrations\201907151520173_AddRentalCustomerMovie.Designer.cs">
       <DependentUpon>201907151520173_AddRentalCustomerMovie.cs</DependentUpon>
@@ -598,9 +594,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201907130952099_AddDrivingLicecenseToApplicationUser.resx">
       <DependentUpon>201907130952099_AddDrivingLicecenseToApplicationUser.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201907131558345_AspNetUaersAddDataAnnotationToPhoneNumber.resx">
-      <DependentUpon>201907131558345_AspNetUaersAddDataAnnotationToPhoneNumber.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201907151520173_AddRentalCustomerMovie.resx">
       <DependentUpon>201907151520173_AddRentalCustomerMovie.cs</DependentUpon>
