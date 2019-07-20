@@ -7,7 +7,7 @@ namespace ASP_Vidly_Udemy.Migrations
     {
         public override void Up()
         {
-            AlterColumn("dbo.AspNetUsers", "PhoneNumber", c => c.String(nullable: false, maxLength: 50));
+            AlterColumn("dbo.AspNetUsers", "PhoneNumber", c => c.String());
         }
         
         public override void Down()

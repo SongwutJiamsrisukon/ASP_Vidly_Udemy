@@ -7,13 +7,13 @@ namespace ASP_Vidly_Udemy.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class addBirthDateToCustomer : IMigrationMetadata
+    public sealed partial class AddBirthDateToCustomer : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(addBirthDateToCustomer));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddBirthDateToCustomer));
         
         string IMigrationMetadata.Id
         {
-            get { return "201907041000095_addBirthDateToCustomer"; }
+            get { return "201907041000095_AddBirthDateToCustomer"; }
         }
         
         string IMigrationMetadata.Source

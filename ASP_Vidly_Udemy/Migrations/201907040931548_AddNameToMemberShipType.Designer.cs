@@ -7,13 +7,13 @@ namespace ASP_Vidly_Udemy.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class addNameToMemberShipType : IMigrationMetadata
+    public sealed partial class AddNameToMemberShipType : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(addNameToMemberShipType));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddNameToMemberShipType));
         
         string IMigrationMetadata.Id
         {
-            get { return "201907040931548_addNameToMemberShipType"; }
+            get { return "201907040931548_AddNameToMemberShipType"; }
         }
         
         string IMigrationMetadata.Source

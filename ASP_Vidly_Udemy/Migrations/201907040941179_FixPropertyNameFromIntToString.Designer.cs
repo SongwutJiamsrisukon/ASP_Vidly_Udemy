@@ -7,13 +7,13 @@ namespace ASP_Vidly_Udemy.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class fixPropertyNameFromIntToString : IMigrationMetadata
+    public sealed partial class FixPropertyNameFromIntToString : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(fixPropertyNameFromIntToString));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(FixPropertyNameFromIntToString));
         
         string IMigrationMetadata.Id
         {
-            get { return "201907040941179_fixPropertyNameFromIntToString"; }
+            get { return "201907040941179_FixPropertyNameFromIntToString"; }
         }
         
         string IMigrationMetadata.Source

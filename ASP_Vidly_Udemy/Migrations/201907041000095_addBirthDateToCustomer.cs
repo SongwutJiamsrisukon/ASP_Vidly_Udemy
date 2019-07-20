@@ -3,7 +3,7 @@ namespace ASP_Vidly_Udemy.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class addBirthDateToCustomer : DbMigration
+    public partial class AddBirthDateToCustomer : DbMigration
     {
         public override void Up()
         {

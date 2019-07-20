@@ -239,9 +239,9 @@
     <Compile Include="Migrations\201907040941179_FixPropertyNameFromIntToString.Designer.cs">
       <DependentUpon>201907040941179_FixPropertyNameFromIntToString.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201907041000095_addBirthDateToCustomer.cs" />
-    <Compile Include="Migrations\201907041000095_addBirthDateToCustomer.Designer.cs">
-      <DependentUpon>201907041000095_addBirthDateToCustomer.cs</DependentUpon>
+    <Compile Include="Migrations\201907041000095_AddBirthDateToCustomer.cs" />
+    <Compile Include="Migrations\201907041000095_AddBirthDateToCustomer.Designer.cs">
+      <DependentUpon>201907041000095_AddBirthDateToCustomer.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\201907041037059_AddMoviesPropertyAndGenreTable.cs" />
     <Compile Include="Migrations\201907041037059_AddMoviesPropertyAndGenreTable.Designer.cs">
@@ -584,8 +584,8 @@
     <EmbeddedResource Include="Migrations\201907040941179_FixPropertyNameFromIntToString.resx">
       <DependentUpon>201907040941179_FixPropertyNameFromIntToString.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201907041000095_addBirthDateToCustomer.resx">
-      <DependentUpon>201907041000095_addBirthDateToCustomer.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201907041000095_AddBirthDateToCustomer.resx">
+      <DependentUpon>201907041000095_AddBirthDateToCustomer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201907041037059_AddMoviesPropertyAndGenreTable.resx">
       <DependentUpon>201907041037059_AddMoviesPropertyAndGenreTable.cs</DependentUpon>

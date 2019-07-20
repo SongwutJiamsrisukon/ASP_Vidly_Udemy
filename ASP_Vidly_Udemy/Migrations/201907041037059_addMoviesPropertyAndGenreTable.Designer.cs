@@ -7,13 +7,13 @@ namespace ASP_Vidly_Udemy.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class addMoviesPropertyAndGenreTable : IMigrationMetadata
+    public sealed partial class AddMoviesPropertyAndGenreTable : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(addMoviesPropertyAndGenreTable));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddMoviesPropertyAndGenreTable));
         
         string IMigrationMetadata.Id
         {
-            get { return "201907041037059_addMoviesPropertyAndGenreTable"; }
+            get { return "201907041037059_AddMoviesPropertyAndGenreTable"; }
         }
         
         string IMigrationMetadata.Source
