@@ -55,8 +55,8 @@ namespace ASP_Vidly_Udemy
             //   consumerSecret: "");
 
             app.UseFacebookAuthentication(
-               appId: "481386432690069",
-               appSecret: "f56944ae011fd0615312be9e4c610b1a");
+               appId: System.Configuration.ConfigurationManager.AppSettings["FacebookAppId"],
+               appSecret: System.Configuration.ConfigurationManager.AppSettings["FacebookAppSecret"]);
 
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{

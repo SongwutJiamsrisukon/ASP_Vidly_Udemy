@@ -32,9 +32,6 @@ namespace ASP_Vidly_Udemy.Models
         public DbSet<RentalCustomerMovie> RentalCustomerMovies { get; set; }
 
 
-
-
-
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

@@ -16,6 +16,7 @@ namespace ASP_Vidly_Udemy.Controllers
 
         public ActionResult About()
         {
+
             ViewBag.Message = "Your application description page.";
 
             return View();
