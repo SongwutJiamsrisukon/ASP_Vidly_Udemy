@@ -83,7 +83,7 @@
                 });
 
             $.validator.addMethod("customValidCustomer", function () {
-                return tempVM.customerId && tempVM.customerId;
+                return tempVM.customerId && tempVM.customerId !== 0;
             }, "Please select a valid customer.");
 
             $.validator.addMethod("customAtLeastOneMovie", function () {
